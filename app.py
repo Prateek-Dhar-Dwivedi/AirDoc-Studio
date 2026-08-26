@@ -1,11 +1,16 @@
 import gradio as gr
 import cv2
 import numpy as np
+import os
+import sys
+import tempfile
 from PIL import Image
+
+# Ensure project root is in sys.path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from app.core.engine import get_ocr_engine
 from app.exporters.exporter import ResultExporters
-import tempfile
-import os
 
 def process_document(image_input, lang, deskew, enhance, binarize):
     if image_input is None:

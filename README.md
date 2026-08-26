@@ -2,7 +2,7 @@
 title: AirDoc Studio
 emoji: 📄
 colorFrom: indigo
-colorTo: cyan
+colorTo: blue
 sdk: gradio
 sdk_version: 5.20.0
 app_file: app.py
