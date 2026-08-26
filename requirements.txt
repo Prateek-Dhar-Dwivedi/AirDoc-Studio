@@ -15,6 +15,7 @@ imgaug>=0.4.0
 pyclipper>=1.4.0
 lmdb>=1.4.0
 visualdl>=2.5.0
+huggingface_hub<0.26.0,>=0.24.0
 cython
 fire
 python-docx
