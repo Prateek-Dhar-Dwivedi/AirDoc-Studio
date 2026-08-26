@@ -1,11 +1,12 @@
 import os
 import shutil
 import uuid
+from pathlib import Path
 from typing import Optional, List
-from fastapi import FastAPI, File, UploadFile, Form, HTTPException, BackgroundTasks
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
-from pydantic import BaseModel
 
 from ..core.config import settings
 from ..core.engine import get_ocr_engine
@@ -114,3 +115,8 @@ async def export_result(task_id: str, export_type: str):
         raise HTTPException(status_code=400, detail=f"Unsupported format {export_type}")
 
     return FileResponse(out_path, filename=f"airdoc_result_{task_id[:8]}.{export_type}")
+
+# Mount static frontend build if present (for Hugging Face & Docker production)
+dist_dir = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
+if dist_dir.exists():
+    app.mount("/", StaticFiles(directory=str(dist_dir), html=True), name="frontend")
