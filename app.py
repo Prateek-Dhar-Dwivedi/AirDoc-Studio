@@ -1,14 +1,14 @@
-import gradio as gr
-import cv2
-import numpy as np
 import os
 import sys
 import tempfile
 from PIL import Image
+import cv2
+import numpy as np
 
 # Ensure project root is in sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import gradio as gr
 from app.core.engine import get_ocr_engine
 from app.exporters.exporter import ResultExporters
 
@@ -51,19 +51,10 @@ def process_document(image_input, lang, deskew, enhance, binarize):
     
     return annotated_img, res.get("raw_text", ""), json_path, txt_path
 
-# Custom sleek Gradio Theme
 custom_theme = gr.themes.Soft(
     primary_hue="indigo",
     secondary_hue="cyan",
     neutral_hue="slate"
-).set(
-    body_background_fill="#020617",
-    block_background_fill="#0f172a",
-    block_border_width="1px",
-    block_border_color="#1e293b",
-    input_background_fill="#1e293b",
-    button_primary_background_fill="#4f46e5",
-    button_primary_background_fill_hover="#4338ca",
 )
 
 with gr.Blocks(theme=custom_theme, title="AirDoc Studio") as demo:
@@ -105,4 +96,4 @@ with gr.Blocks(theme=custom_theme, title="AirDoc Studio") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    demo.launch(server_name="0.0.0.0", server_port=7860, ssr_mode=False)

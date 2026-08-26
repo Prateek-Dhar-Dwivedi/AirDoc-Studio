@@ -19,4 +19,8 @@ imgaug>=0.4.0
 pyclipper>=1.4.0
 lmdb>=1.4.0
 visualdl>=2.5.0
-gradio>=5.0.0
+gradio==4.44.1
+cython
+fire
+python-docx
+rapidfuzz
