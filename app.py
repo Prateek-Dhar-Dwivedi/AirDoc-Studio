@@ -97,4 +97,4 @@ with gr.Blocks(title="AirDoc Studio") as demo:
     )
 
 if __name__ == "__main__":
-    demo.queue().launch()
+    demo.launch()
