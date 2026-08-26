@@ -51,13 +51,7 @@ def process_document(image_input, lang, deskew, enhance, binarize):
     
     return annotated_img, res.get("raw_text", ""), json_path, txt_path
 
-custom_theme = gr.themes.Soft(
-    primary_hue="indigo",
-    secondary_hue="cyan",
-    neutral_hue="slate"
-)
-
-with gr.Blocks(theme=custom_theme, title="AirDoc Studio") as demo:
+with gr.Blocks(title="AirDoc Studio") as demo:
     gr.Markdown(
         """
         # 📄 AirDoc Studio
@@ -92,8 +86,9 @@ with gr.Blocks(theme=custom_theme, title="AirDoc Studio") as demo:
     run_btn.click(
         fn=process_document,
         inputs=[input_image, lang_choice, deskew_toggle, enhance_toggle, binarize_toggle],
-        outputs=[output_image, output_text, json_download, txt_download]
+        outputs=[output_image, output_text, json_download, txt_download],
+        api_name=False
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7860)
+    demo.launch(server_name="0.0.0.0", server_port=7860, show_api=False)
