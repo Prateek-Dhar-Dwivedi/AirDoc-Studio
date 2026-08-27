@@ -48,4 +48,4 @@ RUN mkdir -p uploads outputs models
 EXPOSE 7860
 
 # Run FastAPI serving both API and static frontend
-CMD ["uvicorn", "app.api.routes:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["sh", "-c", "uvicorn app.api.routes:app --host 0.0.0.0 --port ${PORT:-7860}"]
