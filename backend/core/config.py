@@ -14,8 +14,8 @@ OUTPUTS_DIR.mkdir(exist_ok=True)
 class Settings(BaseModel):
     app_name: str = "AirDoc Studio"
     version: str = "1.0.0"
-    host: str = "127.0.0.1"
-    port: int = 8000
+    host: str = os.getenv("HOST", "0.0.0.0")
+    port: int = int(os.getenv("PORT", "8000"))
     use_gpu: bool = False
     lang: str = "en"
     models_dir: str = str(MODELS_DIR)
