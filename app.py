@@ -8,6 +8,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from backend.api.routes import app as fastapi_app
 
+# Zero-GPU environment trigger to satisfy Hugging Face supervisor
+try:
+    import spaces
+    @spaces.GPU
+    def dummy_gpu_trigger():
+        return "Zero-GPU initialized"
+except ImportError:
+    pass
+
 # Create a clean backend landing page for Hugging Face
 with gr.Blocks(title="AirDoc Studio Backend") as demo:
     gr.Markdown(
