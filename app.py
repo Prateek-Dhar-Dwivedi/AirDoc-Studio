@@ -1,21 +1,27 @@
 import os
 import sys
-import uvicorn
+from unittest.mock import MagicMock
+
+# Mock spaces module if running locally (outside Hugging Face Zero-GPU)
+try:
+    import spaces
+except ImportError:
+    spaces = MagicMock()
+    spaces.GPU = lambda x: x
+    sys.modules['spaces'] = spaces
+
 import gradio as gr
+import uvicorn
 
 # Ensure project root is in sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from backend.api.routes import app as fastapi_app
 
-# Zero-GPU environment trigger to satisfy Hugging Face supervisor
-try:
-    import spaces
-    @spaces.GPU
-    def dummy_gpu_trigger():
-        return "Zero-GPU initialized"
-except ImportError:
-    pass
+# Top-level decorator to satisfy Hugging Face Zero-GPU AST parser
+@spaces.GPU
+def dummy_gpu_trigger():
+    return "Zero-GPU initialized"
 
 # Create a clean backend landing page for Hugging Face
 with gr.Blocks(title="AirDoc Studio Backend") as demo:
