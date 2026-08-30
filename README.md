@@ -3,12 +3,13 @@ title: AirDoc Studio
 emoji: 🚀
 colorFrom: indigo
 colorTo: blue
-sdk: docker
-app_port: 7860
+sdk: gradio
+sdk_version: 4.44.1
+app_file: app.py
+pinned: false
+license: mit
 ---
 
-# 📄 AirDoc Studio - Backend API
+# AirDoc Studio
 
-This is the high-performance offline OCR backend API powered by FastAPI & PaddleOCR (PP-OCRv4).
-
-The frontend is hosted on Vercel and routes its OCR requests to this API.
+Air-Gapped, 100% Offline, High-Performance OCR & Document Intelligence Studio powered by PaddleOCR (PP-OCRv4), FastAPI, Vite, React, and Gradio.
