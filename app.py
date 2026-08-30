@@ -6,7 +6,7 @@ import gradio as gr
 # Ensure project root is in sys.path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from app.api.routes import app as fastapi_app
+from backend.api.routes import app as fastapi_app
 
 # Create a clean backend landing page for Hugging Face
 with gr.Blocks(title="AirDoc Studio Backend") as demo:
