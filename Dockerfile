@@ -1,12 +1,3 @@
-# Stage 1: Build the Vite + React frontend
-FROM node:20-alpine AS frontend-builder
-WORKDIR /frontend
-COPY frontend/package*.json ./
-RUN npm install
-COPY frontend/ ./
-RUN npm run build
-
-# Stage 2: Python Backend + Production Server
 FROM python:3.10-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -38,14 +29,11 @@ COPY app/ ./app/
 COPY sample_data/ ./sample_data/
 COPY run_server.py .
 
-# Copy built frontend assets from Stage 1
-COPY --from=frontend-builder /frontend/dist ./frontend/dist
-
 # Create storage directories
 RUN mkdir -p uploads outputs models
 
 # Expose standard Hugging Face Space port
 EXPOSE 7860
 
-# Run FastAPI serving both API and static frontend
-CMD ["sh", "-c", "uvicorn app.api.routes:app --host 0.0.0.0 --port ${PORT:-7860}"]
+# Run FastAPI backend API
+CMD ["sh", "-c", "uvicorn app.api.routes:app --host 0.0.0.0 --port "]
