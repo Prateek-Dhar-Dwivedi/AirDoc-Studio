@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://prateek-dhar-dwivedi-airdoc-studio.hf.space/api/:path*"
+    }
+  ]
+}
